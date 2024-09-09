@@ -1,0 +1,61 @@
+identity_validation:
+  reset_password:
+    jwt_secret: "+PtxuPIMj/dmbVbhepWjOz6XVMExnhAviqM0QvLcweI=" # Use this new key for JWT secret
+
+server:
+  address: 'tcp://0.0.0.0:9091/'
+  buffers:
+    read: 4096
+    write: 4096
+  endpoints:
+    enable_pprof: false
+    enable_expvars: false
+  disable_healthcheck: false
+  tls:
+    key: ""
+    certificate: ""
+ 
+authentication_backend:
+  password_reset:
+    disable: false # Updated deprecated key
+
+  file:
+    path: /config/users.yml
+    password:
+      algorithm: argon2id
+      iterations: 1
+      salt_length: 16
+      parallelism: 8
+      memory: 1024
+
+session:
+  name: authelia_session
+  secret: VPnwduqZkjeFPvUN7TQSdPkHkMtKsC4FO7qKVlHk7+Y=
+  expiration: 3600 # 1 hour
+  inactivity: 300 # 5 minutes
+  cookies:
+    - domain: 10.1.149.64
+      authelia_url: https://10.1.149.64:32618
+storage:
+  local:
+    path: /config/db.sqlite3
+  encryption_key: "+PtxuPIMj/dmbVbhepWjOz6XVMExnhAviqM0QvLcweI=" # Add encryption_key
+
+notifier:
+  filesystem:
+    filename: /config/notifications.log # Path to the file where notifications will be written
+
+access_control:
+  default_policy: deny
+  rules:
+    ## bypass rule
+    - domain:
+        - "auth.domain.com"
+      policy: bypass
+    
+    ## catch-all rule for admins
+    - domain:
+        - "*.domain.com"
+      subject:
+        - "group:admins"
+      policy: one_factor

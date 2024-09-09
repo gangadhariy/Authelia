@@ -1,0 +1,8 @@
+users:
+  john:
+    displayname: "John Doe"
+    password: "$argon2id$v=19$m=65536,t=3,p=4$z+9z6ZabwsQ+SsPfZmM9ng$uvNsIRoTNGRdoz6FVjRs8WQJkVERxnKAj8Qb8PPmfW8"
+    email: john.doe@authelia.com
+    groups:
+      - admins
+      - dev
