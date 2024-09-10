@@ -52,6 +52,7 @@ notifier:
     sender: gangadharyeleholi@gmail.com  # This is the sender email
     tls:
       skip_verify: false 
+      
 access_control:
   default_policy: deny
   rules:
