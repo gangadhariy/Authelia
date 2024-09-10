@@ -15,31 +15,31 @@ To deploy Authelia on Kubernetes, follow these steps:
 ```bash
 git clone https://github.com/gangadhariy/Authelia.git
 ```
-# Change directory to the Authelia folder
+## Change directory to the Authelia folder
 ```bash
 cd Authelia
 ```
-# Create a namespace for Authelia
+## Create a namespace for Authelia
 ```bash
 kubectl create ns authelia
 ```
-# Create a ConfigMap for Authelia users
+## Create a ConfigMap for Authelia users
 ```bash
 kubectl create configmap authelia-users-config --from-file=users.yml -n authelia
 ```
-# Create a ConfigMap for Authelia configuration
+## Create a ConfigMap for Authelia configuration
 ```bash
 kubectl create configmap authelia-config --from-file=configuration.yml -n authelia
 ```
-# Apply the service configuration for Authelia
+## Apply the service configuration for Authelia
 ```bash
 kubectl apply -f authsvc.yaml -n authelia
 ```
-# Apply the ingress configuration for Authelia
+## Apply the ingress configuration for Authelia
 ```bash
 kubectl apply -f authelia-ingress.yaml -n authelia
 ```
-# Apply the deployment configuration for Authelia
+## Apply the deployment configuration for Authelia
 ```bash
 kubectl apply -f authelia-deployment.yaml -n authelia
 ```
