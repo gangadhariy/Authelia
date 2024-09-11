@@ -38,19 +38,27 @@ session:
     - domain: 10.1.149.64
       authelia_url: https://10.1.149.64:30652
 storage:
-  local:
-    path: /config/db.sqlite3
+#  local:
+#    path: /config/db.sqlite3
   encryption_key: "+PtxuPIMj/dmbVbhepWjOz6XVMExnhAviqM0QvLcweI=" # Add encryption_key
+  postgres:
+    host: postgres.default.svc.cluster.local  # Use the FQDN to reach PostgreSQL in the default namespace
+    port: 5432
+    database: astro_db  # Replace with your actual PostgreSQL database
+    username: astro_user  # Replace with your actual PostgreSQL username
+    password: S3cret  # Replace with your actual PostgreSQL password
+    ssl:
+      mode: disable  
 
 notifier:
 #  filesystem:
 #    filename: /config/notifications.log # Path to the file where notifications will be written
-  smtp:
-    username: gangadharyeleholi@gmail.com
-    password: vqgrwjbyopkdfgig
-    address: submission://smtp.gmail.com:587
-    sender: gangadharyeleholi@gmail.com  # This is the sender email
-    tls:
+ smtp:
+  username: gangadharyeleholi@gmail.com
+  password: vqgrwjbyopkdfgig
+  address: submission://smtp.gmail.com:587
+  sender: gangadharyeleholi@gmail.com  # This is the sender email
+  tls:
       skip_verify: false 
 access_control:
   default_policy: deny
@@ -68,6 +76,6 @@ access_control:
       policy: one_factor
 
     - domain: "10.1.149.64"
-      policy: two_factor
+      policy: one_factor
       resources:
         - "^/nginx.*"
